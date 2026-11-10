@@ -58,10 +58,15 @@ def build(ref: str) -> None:
     (OUT / ".claude").mkdir(parents=True, exist_ok=True)
     (OUT / "Thuc-hanh").mkdir(exist_ok=True)
     (OUT / "Tai-lieu").mkdir(exist_ok=True)
-    # newline="\n": gói luôn LF, kể cả khi dựng trên Windows (L07).
-    (OUT / "CLAUDE.md").write_text(claude_md(), encoding="utf-8", newline="\n")
-    (OUT / ".claude" / "settings.json").write_text(
-        json.dumps(settings(ref), ensure_ascii=False, indent=2) + "\n", encoding="utf-8", newline="\n")
+    # Gói luôn LF, kể cả khi dựng trên Windows (L07).
+    write_lf(OUT / "CLAUDE.md", claude_md())
+    write_lf(OUT / ".claude" / "settings.json", json.dumps(settings(ref), ensure_ascii=False, indent=2) + "\n")
+
+
+def write_lf(path: Path, text: str) -> None:
+    # Path.write_text(newline=…) chỉ có từ Python 3.10; CI còn chạy 3.9.
+    with open(path, "w", encoding="utf-8", newline="\n") as f:
+        f.write(text)
 
 
 def support_text(arg: str | None) -> str | None:

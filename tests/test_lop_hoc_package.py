@@ -178,7 +178,10 @@ class LopHocPackage(unittest.TestCase):
             if p.is_file() and p.suffix in (".md", ".json"):
                 self.assertNotIn(b"\r\n", p.read_bytes(), p.relative_to(ROOT).as_posix())
         builder = (ROOT / "tools" / "build_lop_hoc_mau.py").read_text(encoding="utf-8")
-        self.assertEqual(builder.count('encoding="utf-8", newline="\\n")'), 2,"the builder writes CLAUDE.md and settings.json with LF")
+        self.assertIn('open(path, "w", encoding="utf-8", newline="\\n")', builder)
+        for target in ('write_lf(OUT / "CLAUDE.md"', 'write_lf(OUT / ".claude" / "settings.json"'):
+            self.assertIn(target, builder, "the builder writes CLAUDE.md and settings.json with LF")
+        self.assertNotIn("write_text(", builder.split("def build", 1)[1].split("\ndef ", 1)[0], "Path.write_text(newline=) needs Python 3.10")
 
     def test_feedback_config_only_in_the_zip(self):
         # v0.13: nơi nhận góp ý chèn vào ZIP từ .phan-hoi.json (gitignore); repo không có, mod giữ CLASS_VERSION khớp plugin.json.
