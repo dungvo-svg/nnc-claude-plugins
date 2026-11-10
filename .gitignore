@@ -3,6 +3,7 @@ __pycache__/
 .pytest_cache/
 .nnc-oser/
 .venv/
+workspace/
 
 # Engine-generated editor types/tsconfig beside the lop-hoc mod
 plugins/lop-hoc/.claude-plugin/types/
