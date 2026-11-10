@@ -67,7 +67,7 @@ class LopHocPackage(unittest.TestCase):
 
     def test_nnc_version_carries_lophoc_0120_and_guide_has_reload_hint(self):
         nnc = json.loads(NNC.read_text(encoding="utf-8"))["version"]
-        self.assertEqual(nnc, "5.1.0-alpha.2+lophoc.0.13.0")
+        self.assertEqual(nnc, "5.1.0-alpha.2+lophoc.0.13.1")
         self.assertEqual(self.entries["nnc"]["version"], nnc)
         guide = (MAU / "HUONG-DAN.md").read_text(encoding="utf-8")
         self.assertIn("Chưa thấy bục giảng: gõ `/reload-plugins`", guide)

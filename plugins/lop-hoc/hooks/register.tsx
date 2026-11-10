@@ -84,7 +84,7 @@ const BADGES = '.lop-hoc/huy-hieu.json'
 // v0.13 — nơi nhận góp ý (người phát hành chèn vào gói lúc đóng ZIP; không có trong repo công khai).
 const FEEDBACK_CONFIG = '.claude/phan-hoi.json'
 // Bản lớp học ghi kèm mỗi góp ý; bài kiểm giữ khớp với plugin.json.
-export const CLASS_VERSION = '0.13.0'
+export const CLASS_VERSION = '0.13.1'
 const TAG = '[Lớp học] '
 const CUE = '[Giáo án] '
 
